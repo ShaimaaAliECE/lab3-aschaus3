@@ -4,7 +4,7 @@ const express = require('express') //Requiring Express
 const app = express()
 app.use(express.static('public'))
 
-app.set('port', '3000')
+app.set('port', '3000') //port
 
 const server = http.createServer(app)
 server.on('listening', () => {
