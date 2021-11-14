@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Websockets drawing app</title>
+  <link rel="stylesheet" type="text/css" href="adminStyles.css" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.1/p5.min.js"></script> 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.1/addons/p5.sound.min.js"></script>
+  <script type="text/javascript" src="sketch.js"></script>
+</head>
+
+<body>
+  <div id = "Bar">
+    <input type="text" class="topBar" name="userName" placeholder="Enter Name" />  
+    <input type="text" class="topBar" list="times" placeholder="Choose Time"/>
+    <input type="button" class="adminBtn" value="Save"/>
+    <input type="button" class="adminBtn" value="View Saved Drawings"/>
+    <input type="button" class="adminBtn" value="Set Times"/>
+    <input type="button" class="adminBtn" value="Update Times"/>
+
+    <datalist id="times">
+      <option value="9:00 AM">
+      <option value="10:00 AM">
+      <option value="11:00 AM">
+      <option value="12:00 PM">
+    </datalist> 
+  </div>
+  
+</body>
+</html>

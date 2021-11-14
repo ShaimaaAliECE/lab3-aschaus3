@@ -1,0 +1,19 @@
+.adminBtn{
+    background-color: orange;
+    border: 2;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color:black;  
+}
+
+.topBar{
+    text-align: center;
+}
+
+#Bar{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
