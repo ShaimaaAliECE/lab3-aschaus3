@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <title>Doodle</title>
+</head>
+<body>
+  <h1 class="title">Guest Doodle</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+
+        <% for (let i = 1; i <= slotCount; i++) { %>
+          <th>Time Slot <%= i %></th>
+        <% } %>
+
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- guest form to add an entry -->
+      <tr class="form-row-tr">
+        <form action="/add-guest" method="GET">
+          <div class="doodle-form-row">
+            <td style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+            </td>
+            <td>
+              <input class="name-input" placeholder="Name" type="text" name="name" />
+            </td>
+
+            <% for (let i = 1; i <= slotCount; i++) { %>
+              <td>
+                <input type="checkbox" class="slot-check-box" name="Slot_<%= i %>" value="True" />
+              </td>
+            <% } %>
+
+            <td>
+              <button class="btn-save-guest" type="submit">SUBMIT</button>
+            </td>
+          </div>
+        </form>
+      </tr>
+
+      <!-- data rows -->
+      <%
+        // track the status of the checkboxes
+        let status;
+        for (row of rows) {
+      %>
+      <tr>
+        <td style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+        </td>
+        <td>
+          <input class="name-input" placeholder="Name" type="text" value="<%= row.Name %>" disabled/>
+        </td>
+        <%
+          for (let i = 1; i <= slotCount; i++) {
+            status = row[`Slot${i}`] ? "checked" : undefined;
+        %>
+      <td>
+        <input type="checkbox" class="slot-check-box" disabled <%= status %> />
+      </td>
+      <% } %>
+      </tr>
+    <% } %>
+    </tbody>
+  </table>
+
+</body>
+</html>

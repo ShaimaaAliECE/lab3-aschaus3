@@ -1,0 +1,220 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  background-color: green;
+  align-items: center;
+}
+
+.title {
+  padding: 10px;
+  margin-bottom: 50px;
+  color: var(--denim);
+  background-color: gold;
+  border-bottom: 5px solid var(--denim);
+  text-transform: uppercase;
+}
+
+.help-text {
+  color: black;
+  color:black;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 10px;
+  border-radius: 5px;
+  color:black;
+  border-color: black;
+  border: 2px;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  text-transform: uppercase;
+  width: 100%;
+  font-weight: bold;
+}
+
+.btn:hover {
+  color: gold;
+  background-color: black;
+  border: 2px solid black;
+  padding: 6px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  margin: 0 auto;
+  background-color: gold;
+  border-color: black;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.admin-login-form {
+  width: max-content;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--denim);
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.admin-login-form > input {
+  margin: 7px;
+  padding: 7px;
+  width: 300px;
+  border-radius: 5px;
+  border: none;
+}
+
+.admin-login-form > button {
+  margin: 5px;
+  padding: 7px;
+  text-transform: uppercase;
+  color: white;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 5px;
+  width: 50%;
+  transition-duration: 0.3s;
+}
+
+.admin-login-form > button:hover {
+  background-color: #016fcd;
+  cursor: pointer;
+}
+
+table {
+  width: 95%;
+  margin: 0 auto;
+  justify-content: center;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.form-row-tr {
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+table tr {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+table tr th {
+  text-transform: uppercase;
+  padding: 10px;
+  color: black;
+}
+
+table tr td {
+  text-align: center;
+  justify-content: center;
+  background-color: black;
+  padding: 10px;
+}
+
+table tr td:nth-child(1) {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+table tr td:nth-last-child(1) {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.name-input {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #fafafa;
+  border: 1px solid #cacece;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+
+.btn-save-guest {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-save-guest:hover {
+  background-color: #016fcd;
+  cursor: pointer;
+}
+
+.slot-check-box {
+  appearance: none;
+  margin: 5px;
+  background-color: white;
+  border: 1px solid lightgray;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+  padding: 9px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+  transition-duration: 0.3s;
+}
+
+.slot-check-box:active, .regular-checkbox:checked:active {
+  box-shadow: 0 1px 2px var(--success), inset 0px 1px 3px var(--success);
+}
+
+.slot-check-box:checked {
+  background-color: #e9ecee;
+  border: 1px solid var(--success);
+  box-shadow: 0 1px 2px var(--success), inset 0px -15px 10px -12px var(--success), inset 15px 10px -12px var(--success);
+  color: var(--primary);
+}
+
+.slot-check-box:checked:after {
+  content: '\2714';
+  font-size: 14px;
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  color: var(--success);
+}
+
+.user-name {
+  color: var(--marigold);
+}
+
+.btn-logout {
+  padding: 10px;
+  background-color: var(--denim);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition-duration: 0.3s;
+}
+
+.btn-logout:hover {
+  cursor: pointer;
+  filter: brightness(120%);
+}
+
+.auth-fail-text {
+  text-align: center;
+  color: var(--screen);
+  background-color: var(--danger);
+  padding: 10px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  width: 75%;
+  margin: 10px auto;
+}
