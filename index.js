@@ -1,45 +1,39 @@
 const express = require("express");
-const { createDBConnection, users, doodleSlots } = require('./database/DBVariables');
+const { createDBConnection, users, times, timeSlots } = require('./database/DBVariables');
+const { getPageData, updateTimeSlots } = require('./database/DBQueries');
 
-// express constants
 const app = express();
 const router = express.Router();
-
-// specify port number
-const port = process.env.port || 8080;
-
-// specify render engine
+const port = process.env.port || 80;
 app.set('view engine', 'ejs');
 
-// store user if they logged in
+//Will store the current user
 let currentUser = undefined;
-
-// number of total slots available
 const slotCount = 10;
 
-// the default url path
-router.get('/', (req, res) => {
-  // if the user is logged in show them the other page
-  if (currentUser !== undefined) {
+//If there is a current user, load admin-view
+router.get('/', (req, res) => 
+{
+  if (currentUser !== undefined) 
+  {
     res.redirect('/admin-view');
     return;
   }
-
   res.render('index');
 
 });
 
-// render html for the admin login page
-router.get('/login-view', (req, res) => {
+// Admin login page
+router.get('/login-view', (req, res) => 
+{
   res.render('admin-login');
 })
 
-// enable reading POST data
 router.use(express.urlencoded({
   extended: true
 }));
 
-// login for admin
+// Admin login
 router.post('/admin-login', (req, res) => {
   if (currentUser) {
     res.redirect('/admin-view');
@@ -49,24 +43,15 @@ router.post('/admin-login', (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
 
-  // create a db connection
+  
   const conn = createDBConnection();
-
-  // connect to the db
   conn.connect();
 
   // query to get the user
-  conn.query(`
-      SELECT
-        *
-      FROM
-        ${users}
-      WHERE
-        Username = \"${username}\" AND
-        password = \"${password}\";
-    `, (err, rows, fields) => {
-        if (err) throw err;
-
+  conn.query(`SELECT * FROM ${users} WHERE Username = \"${username}\" AND password = \"${password}\";`
+      , (err, rows, fields) => {
+        if (err) 
+          throw err;
         if (rows.length === 1) {
           currentUser = username;
           res.redirect('/admin-view');
@@ -87,29 +72,13 @@ router.get('/admin-login', (req, res) => {
 // for use as guest login
 router.get('/guest', (req, res) => {
 
-  // get previous data from db connection
-  const conn = createDBConnection();
+  getPageData().then(({timeEntries, timesEntries}) => {
 
-  // connect to db
-  conn.connect();
-
-  // read previous data and convert to html
-  conn.query(`
-    SELECT
-      *
-    FROM
-      ${doodleSlots};
-    `, (err, rows, fields) => {
-        if (err) throw err;
-
-        // renders the html for the given file with the values passed to it
-        res.render('guest-view',  { rows: rows, slotCount: slotCount });
+      res.render('guest-view',  { rows: timesEntries, slotCount: slotCount, timeSlots: timeEntries });
+    
+  }).catch((err) => {
+    throw err;
   });
-
-  // close connection
-  conn.end();
-
-  return;
 });
 
 // for adding guest data to the database
@@ -136,28 +105,20 @@ router.get('/add-guest', (req, res) => {
     req.query.Slot_10 === "True" ? true : false
   ];
 
-  // create db connection
   const conn = createDBConnection();
-
-  // connect to the db
   conn.connect();
 
   // insert the data in the table
-  conn.query(`
-      INSERT INTO ${doodleSlots}
-      VALUES
-        (\"${name}\", ${slots[0]}, ${slots[1]}, ${slots[2]}, ${slots[3]}, ${slots[4]}, ${slots[5]}, ${slots[6]}, ${slots[7]}, ${slots[8]}, ${slots[9]});
-    `, (err) => {
-      if (err) throw err;
-
-      console.log('Insert Completed Successfully.');
+  conn.query(`INSERT INTO ${times}
+      VALUES (\"${name}\", ${slots[0]}, ${slots[1]}, ${slots[2]}, ${slots[3]}, ${slots[4]}, ${slots[5]}, ${slots[6]}, ${slots[7]}, ${slots[8]}, ${slots[9]});`
+      , (err) => {
+      if (err) 
+        throw err;
 
       // redirect back to the page
       res.redirect('/guest');
       return;
     })
-
-  // close the connection
   conn.end();
 });
 
@@ -169,7 +130,45 @@ router.get('/admin-view', (req, res) => {
     return;
   }
 
-  res.render('admin-view', { user: currentUser });
+  getPageData().then(({timeEntries, timesEntries}) => {
+      res.render('admin-view', {user: currentUser, timeSlots: timeEntries, rows: timesEntries, slotCount: slotCount})
+    
+  }).catch((err) => {
+    throw err;
+  });
+
+});
+
+// update the slots from the admin
+router.get('/update-slots', async (req, res) => {
+  // to prevent unauthenticated use
+  if (!currentUser) {
+    res.redirect('/');
+    return;
+  }
+
+  // Get the values from the slots
+  let slotValues = {
+    "Slot1": req.query.Slot1,
+    "Slot2": req.query.Slot2,
+    "Slot3": req.query.Slot3,
+    "Slot4": req.query.Slot4,
+    "Slot5": req.query.Slot5,
+    "Slot6": req.query.Slot6,
+    "Slot7": req.query.Slot7,
+    "Slot8": req.query.Slot8,
+    "Slot9": req.query.Slot9,
+    "Slot10": req.query.Slot10
+  }
+
+  // call the async function to update the values of the timeSlots table
+  updateTimeSlots(slotValues).then(() => {
+    res.redirect('/admin-view');
+    return;
+
+  }).catch((err) => {
+    throw err;
+  });
 });
 
 // for logging out
@@ -180,14 +179,8 @@ router.get('/logout', (req, res) => {
   return;
 });
 
-// using router to send html pages
+
 app.use('/', router);
-
-// serve static files
 app.use(express.static('public'));
-
-// specify port to listen
 app.listen(port);
-
-// provide message that the server has started
-console.log('Server started at http://localhost:' + port);
+console.log('Server launched: ' + port); //Confimation message

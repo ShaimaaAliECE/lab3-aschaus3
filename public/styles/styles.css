@@ -1,31 +1,28 @@
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 body {
   width: 100%;
   justify-content: center;
   text-align: center;
-  background-color: green;
+  background-color: lightgray;
   align-items: center;
 }
 
 .title {
   padding: 10px;
   margin-bottom: 50px;
-  color: var(--denim);
+  color: black;
   background-color: gold;
-  border-bottom: 5px solid var(--denim);
+  border-bottom: 5px solid blue;
   text-transform: uppercase;
+}
+
+#img{
+  width: 60%;
+  height: 60%
 }
 
 .help-text {
   color: black;
-  color:black;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
@@ -34,66 +31,21 @@ body {
   padding: 10px;
   border-radius: 5px;
   color:black;
+  border: 10px;
   border-color: black;
-  border: 2px;
+  background-color: gold;
+  margin: 20px;
   text-decoration: none;
-  transition-duration: 0.3s;
   text-transform: uppercase;
   width: 100%;
-  font-weight: bold;
 }
 
 .btn:hover {
   color: gold;
   background-color: black;
-  border: 2px solid black;
-  padding: 6px;
-}
-
-.btn-container {
-  display: flex;
-  justify-content: space-around;
-  width: 50%;
-  margin: 0 auto;
-  background-color: gold;
+  border: 2px;
   border-color: black;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-.admin-login-form {
-  width: max-content;
-  justify-content: center;
-  text-align: center;
-  background-color: var(--denim);
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.admin-login-form > input {
-  margin: 7px;
-  padding: 7px;
-  width: 300px;
-  border-radius: 5px;
-  border: none;
-}
-
-.admin-login-form > button {
-  margin: 5px;
-  padding: 7px;
-  text-transform: uppercase;
-  color: white;
-  background-color: var(--primary);
-  border: none;
-  border-radius: 5px;
-  width: 50%;
-  transition-duration: 0.3s;
-}
-
-.admin-login-form > button:hover {
-  background-color: #016fcd;
-  cursor: pointer;
+  padding: 6px;
 }
 
 table {
@@ -136,33 +88,19 @@ table tr td:nth-last-child(1) {
   border-bottom-right-radius: 5px;
 }
 
-.name-input {
+.name{
   padding: 5px;
   border-radius: 5px;
-  background-color: #fafafa;
-  border: 1px solid #cacece;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-}
-
-.btn-save-guest {
-  padding: 5px;
-  border-radius: 5px;
-  border: none;
-  background-color: var(--primary);
-  color: white;
-}
-
-.btn-save-guest:hover {
-  background-color: #016fcd;
-  cursor: pointer;
+  background-color: white;
+  border: 1px solid red;
+  text-align: center;
 }
 
 .slot-check-box {
   appearance: none;
   margin: 5px;
   background-color: white;
-  border: 1px solid lightgray;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+  border: 1px solid red;
   padding: 9px;
   border-radius: 3px;
   display: inline-block;
@@ -170,14 +108,9 @@ table tr td:nth-last-child(1) {
   transition-duration: 0.3s;
 }
 
-.slot-check-box:active, .regular-checkbox:checked:active {
-  box-shadow: 0 1px 2px var(--success), inset 0px 1px 3px var(--success);
-}
-
 .slot-check-box:checked {
-  background-color: #e9ecee;
-  border: 1px solid var(--success);
-  box-shadow: 0 1px 2px var(--success), inset 0px -15px 10px -12px var(--success), inset 15px 10px -12px var(--success);
+  background-color: white;
+  border: 2px solid var gold;
   color: var(--primary);
 }
 
@@ -187,31 +120,17 @@ table tr td:nth-last-child(1) {
   position: absolute;
   top: 0px;
   left: 3px;
-  color: var(--success);
+  color: var black;
 }
 
 .user-name {
-  color: var(--marigold);
-}
-
-.btn-logout {
-  padding: 10px;
-  background-color: var(--denim);
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition-duration: 0.3s;
-}
-
-.btn-logout:hover {
-  cursor: pointer;
-  filter: brightness(120%);
+  color: var gold;
 }
 
 .auth-fail-text {
   text-align: center;
-  color: var(--screen);
-  background-color: var(--danger);
+  color: Black;
+  background-color: lightgray;
   padding: 10px;
   text-transform: uppercase;
   border-radius: 5px;

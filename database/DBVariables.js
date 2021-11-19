@@ -1,10 +1,12 @@
-// import variables and methods
-const createDBConnection = require('./dbConnection');
+// import 
+const DBConnection = require('./dbConnection');
 
-// export the variables and methods
-module.exports = {
-  createDBConnection: createDBConnection,
+// export 
+module.exports = 
+{
+  DBConnection: DBConnection,
   users: 'Users',
-  doodleSlots: 'DoodleSlots'
+  times: 'times',
+  timeSlots: 'timeSlots'
 }
 

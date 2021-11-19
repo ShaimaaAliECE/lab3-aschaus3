@@ -1,7 +1,8 @@
-const mysql = require('mysql');
+const conn = require('mysql'); 
 
-function createDBConnection() {
-  let connection = mysql.createConnection({
+//Connecting to the database
+function DBConnection() {
+  let connection = conn.createConnection({
     host:'34.70.248.65',
     user:'root',
     password:'3316',
@@ -11,4 +12,4 @@ function createDBConnection() {
   return connection;
 }
 
-module.exports = createDBConnection;
+module.exports = DBConnection;

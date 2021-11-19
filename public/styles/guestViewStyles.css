@@ -1,0 +1,11 @@
+.save-guest {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color:yellow;
+    color: black;
+  }
+  
+  .save-guest:hover {
+    background-color: red;
+  }

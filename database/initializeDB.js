@@ -1,111 +1,82 @@
-// File to be executed to initialize the database with data and tables required
 
-// import db connection creation function
-const createDBConnection = require('./dbConnection');
+const DBConnection = require('./dbConnection');
+const { users, times, timeSlots } = require('./DBVariables'); //Getting the variables
+const conn = DBConnection();
 
-// get variables of table names
-const { users, doodleSlots } = require('./DBVariables');
 
-// create a connection
-const conn = createDBConnection();
-
-// connect to the DB
 conn.connect();
 
-// drop table if it already exists
+
+//Dropping all the tables if they exist
 conn.query(`DROP TABLE IF EXISTS ${users};`, (err) => {
-  if (err) throw err;
-
-  // success message
-  console.log(`Dropped ${users} table`);
+  if (err) 
+    throw err;
 });
 
-// query to create table
-conn.query(`
-  CREATE TABLE ${users} (
-    Username VARCHAR(100)
-    ,Password VARCHAR(100)
-  );
-`, (err) => {
-    if (err) throw err;
 
-    // success message
-    console.log(`Successfully Created ${users} table`);
+conn.query(`DROP TABLE IF EXISTS ${times};`, (err) => {
+  if (err) 
+    throw err;
 });
 
-// sample admin user data array
+conn.query(`DROP TABLE IF EXISTS ${timeSlots};`, (err) => {
+  if (err) 
+    throw err;
+});
+
+//Creating all three tables
+conn.query(`CREATE TABLE ${users} (Username VARCHAR(100) ,Password VARCHAR(100));`
+, (err) => {
+    if (err) 
+      throw err;
+});
+
+
+conn.query(`CREATE TABLE ${times} ( Name VARCHAR(100) ,Slot1 BOOLEAN ,Slot2 BOOLEAN ,Slot3 BOOLEAN ,Slot4 BOOLEAN ,Slot5 BOOLEAN ,Slot6 BOOLEAN ,Slot7 BOOLEAN ,Slot8 BOOLEAN ,Slot9 BOOLEAN ,Slot10 BOOLEAN);`
+, (err) => {
+    if (err) 
+      throw err;
+});
+
+conn.query(`CREATE TABLE ${timeSlots} ( SlotName VARCHAR(100) ,SlotValue VARCHAR(100)) `
+, (err) => {
+    if (err) 
+      throw err;
+});
+
+// Adding an Admin
 const adminUsers = [
   {
-    "username": "Admin0",
-    "pwd": "Western#0"
-  },
-  {
-    "username": "Admin1",
-    "pwd": "Western#1"
+    "username": "Andrew",
+    "password": "3316"
   }
 ];
 
 // query to insert admin users from data object above
 for (user of adminUsers) {
-  conn.query(`
-    INSERT INTO ${users} VALUES (
-      '${user.username}'
-      ,'${user.pwd}'
-    );
-  `, (err) => {
-      if (err) throw err;
-
-      // success message
-      console.log(`Successfully added user to ${users} table`);
+  conn.query(`INSERT INTO ${users} VALUES ('${user.username}','${user.password}');`
+  , (err) => {
+      if (err) 
+        throw err;
   });
 };
 
-// select all rows from users
-conn.query(`
-  SELECT
-    *
-  FROM
-    ${users}
-`, (err, rows, fields) => {
-  if (err) throw err; // throw the error if any
-
-  console.log(fields); // print the fields
-
-  console.log(`Data from ${users} table: `);
-  for (let row of rows) // print the rows returned
-    console.log(row);
-
-});
-
-// drop table if it already exists
-conn.query(`DROP TABLE IF EXISTS ${doodleSlots};`, (err) => {
-  if (err) throw err;
-
-  // success message
-  console.log(`Dropped ${doodleSlots} table`);
-});
-
-// query to create table
-conn.query(`
-  CREATE TABLE ${doodleSlots} (
-    Name VARCHAR(100)
-    ,Slot1 BOOLEAN
-    ,Slot2 BOOLEAN
-    ,Slot3 BOOLEAN
-    ,Slot4 BOOLEAN
-    ,Slot5 BOOLEAN
-    ,Slot6 BOOLEAN
-    ,Slot7 BOOLEAN
-    ,Slot8 BOOLEAN
-    ,Slot9 BOOLEAN
-    ,Slot10 BOOLEAN
-  );
-`, (err) => {
-    if (err) throw err;
-
-    // success message
-    console.log(`Successfully Created ${doodleSlots} table`);
-});
+//Adding data to the timeSlots table
+  conn.query(`INSERT INTO ${timeSlots} VALUES 
+    ('Slot1', '8am'),
+    ('Slot2', '9am'),
+    ('Slot3', '10am'),
+    ('Slot4', '11am'),
+    ('Slot5', '12pm'),
+    ('Slot6', '1pm'),
+    ('Slot7', '2pm'),
+    ('Slot8', '3pm'),
+    ('Slot9', '4pm'),
+    ('Slot10', '5pm')
+  `, (err) => {
+    if (err) 
+      throw err;
+  });
 
 // end the connection to the DB
 conn.end();

@@ -4,34 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/styles.css">
-  <title>Doodle</title>
+  <link rel="stylesheet" href="./styles/guestViewStyles.css">
+  <title>Guest</title>
 </head>
 <body>
-  <h1 class="title">Guest Doodle</h1>
+  <h1 class="title">Guest Sign Up</h1>
 
   <table>
     <thead>
       <tr>
         <th></th>
-        <th>Name</th>
+        <th>Enter Name</th>
 
-        <% for (let i = 1; i <= slotCount; i++) { %>
-          <th>Time Slot <%= i %></th>
-        <% } %>
+        <%
+        let timeValue;
+        for (let row of timeSlots) {
+          timeValue = row.SlotValue;
+      %>
+        <th><%= timeValue %></th>
+      <% } %>
 
         <th></th>
       </tr>
     </thead>
 
     <tbody>
-      <!-- guest form to add an entry -->
       <tr class="form-row-tr">
         <form action="/add-guest" method="GET">
           <div class="doodle-form-row">
             <td style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
             </td>
             <td>
-              <input class="name-input" placeholder="Name" type="text" name="name" />
+              <input class="name" placeholder="Enter Name" type="text" name="name" />
             </td>
 
             <% for (let i = 1; i <= slotCount; i++) { %>
@@ -39,17 +43,14 @@
                 <input type="checkbox" class="slot-check-box" name="Slot_<%= i %>" value="True" />
               </td>
             <% } %>
-
             <td>
-              <button class="btn-save-guest" type="submit">SUBMIT</button>
+              <button class="save-guest" type="submit">SAVE</button>
             </td>
           </div>
         </form>
       </tr>
 
-      <!-- data rows -->
       <%
-        // track the status of the checkboxes
         let status;
         for (row of rows) {
       %>
@@ -57,7 +58,7 @@
         <td style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
         </td>
         <td>
-          <input class="name-input" placeholder="Name" type="text" value="<%= row.Name %>" disabled/>
+          <input class="name" placeholder="Enter Name" type="text" value="<%= row.Name %>" disabled/>
         </td>
         <%
           for (let i = 1; i <= slotCount; i++) {

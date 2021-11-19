@@ -1,0 +1,21 @@
+.btn-logout {
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .btn-logout:hover, .btn-save-admin:hover {
+    background-color: red;
+  }
+
+  #spacer{
+    margin-bottom: 10px;
+}
+
+.btn-save-admin{
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+}

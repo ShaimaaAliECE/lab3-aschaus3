@@ -1,0 +1,36 @@
+
+.admin-login-form > input {
+    margin: 7px;
+    padding: 7px;
+    width: 300px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+  }
+  
+  .admin-login-form > button {
+    margin: 5px;
+    padding: 7px;
+    text-transform: uppercase;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    width: 50%;
+    transition-duration: 0.3s;
+  }
+  
+  .admin-login-form > button:hover {
+    background-color: #016fcd;
+    cursor: pointer;
+  }
+
+  .admin-login-form {
+    width: max-content;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--denim);
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+  }
