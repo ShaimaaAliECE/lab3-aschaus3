@@ -96,7 +96,7 @@ table tr td:nth-last-child(1) {
   text-align: center;
 }
 
-.slot-check-box {
+.slot {
   appearance: none;
   margin: 5px;
   background-color: white;
@@ -108,32 +108,23 @@ table tr td:nth-last-child(1) {
   transition-duration: 0.3s;
 }
 
-.slot-check-box:checked {
-  background-color: white;
-  border: 2px solid var gold;
-  color: var(--primary);
-}
-
-.slot-check-box:checked:after {
+.slot:checked:after {
   content: '\2714';
   font-size: 14px;
   position: absolute;
   top: 0px;
   left: 3px;
-  color: var black;
+  color: black;
 }
 
 .user-name {
   color: var gold;
 }
 
-.auth-fail-text {
+.failLogin {
   text-align: center;
   color: Black;
-  background-color: lightgray;
   padding: 10px;
   text-transform: uppercase;
-  border-radius: 5px;
-  width: 75%;
   margin: 10px auto;
 }

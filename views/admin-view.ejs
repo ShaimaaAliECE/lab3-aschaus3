@@ -13,7 +13,7 @@
   </h1>
 
   <% if (locals.msg) { %>
-      <h3 class="auth-fail-text" style="background-color: black;">
+      <h3 class="failLogin" style="background-color: black;">
           <%= msg %>
       </h3>
   <% } %>
@@ -37,7 +37,7 @@
             timeValue = i.SlotValue;
         %>
           <th>
-            <textarea type="text" name="<%= timeName %>"><%= timeValue %></textarea>
+            <textarea style="width: 50px;" type="text" name="<%= timeName %>"><%= timeValue %></textarea>
           </th>
         <% } %>
         </form>
@@ -59,7 +59,7 @@
             status = row[`Slot${i}`] ? "checked" : undefined;
         %>
         <td>
-          <input type="checkbox" class="slot-check-box" disabled <%= status %> />
+          <input type="checkbox" class="slot" disabled <%= status %> />
         </td>
         <% } %>
       </tr>

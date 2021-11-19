@@ -1,5 +1,5 @@
 const express = require("express");
-const { createDBConnection, users, times, timeSlots } = require('./database/DBVariables');
+const { DBConnection, users, times, timeSlots } = require('./database/DBVariables');
 const { getPageData, updateTimeSlots } = require('./database/DBQueries');
 
 const app = express();
@@ -19,7 +19,7 @@ router.get('/', (req, res) =>
     res.redirect('/admin-view');
     return;
   }
-  res.render('index');
+  res.render('Home');
 
 });
 
@@ -44,7 +44,7 @@ router.post('/admin-login', (req, res) => {
   let password = req.body.password;
 
   
-  const conn = createDBConnection();
+  const conn = DBConnection();
   conn.connect();
 
   // query to get the user
@@ -105,7 +105,7 @@ router.get('/add-guest', (req, res) => {
     req.query.Slot_10 === "True" ? true : false
   ];
 
-  const conn = createDBConnection();
+  const conn = DBConnection();
   conn.connect();
 
   // insert the data in the table
