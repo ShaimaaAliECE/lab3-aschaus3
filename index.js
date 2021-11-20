@@ -11,12 +11,12 @@ app.set('view engine', 'ejs');
 let currentUser = undefined;
 const slotCount = 10;
 
-//If there is a current user, load admin-view
+//If there is a current user, load AdminView
 router.get('/', (req, res) => 
 {
   if (currentUser !== undefined) 
   {
-    res.redirect('/admin-view');
+    res.redirect('/AdminView');
     return;
   }
   res.render('Home');
@@ -24,9 +24,9 @@ router.get('/', (req, res) =>
 });
 
 // Admin login page
-router.get('/login-view', (req, res) => 
+router.get('/login', (req, res) => 
 {
-  res.render('admin-login');
+  res.render('AdminLogin');
 })
 
 router.use(express.urlencoded({
@@ -34,9 +34,9 @@ router.use(express.urlencoded({
 }));
 
 // Admin login
-router.post('/admin-login', (req, res) => {
+router.post('/AdminLogin', (req, res) => {
   if (currentUser) {
-    res.redirect('/admin-view');
+    res.redirect('/AdminView');
     return;
   }
 
@@ -54,9 +54,9 @@ router.post('/admin-login', (req, res) => {
           throw err;
         if (rows.length === 1) {
           currentUser = username;
-          res.redirect('/admin-view');
+          res.redirect('/AdminView');
         } else {
-          res.redirect('/admin-login');
+          res.redirect('/AdminLogin');
         }
     });
 
@@ -64,17 +64,17 @@ router.post('/admin-login', (req, res) => {
   conn.end();
 });
 
-router.get('/admin-login', (req, res) => {
-  res.render('admin-login', { errMsg: 'Invalid Credentials!' })
+router.get('/AdminLogin', (req, res) => {
+  res.render('AdminLogin', { errMsg: 'Incorrect login, please try again'})
 });
 
 
 // for use as guest login
-router.get('/guest', (req, res) => {
+router.get('/enter-guest', (req, res) => {
 
   getPageData().then(({timeEntries, timesEntries}) => {
 
-      res.render('guest-view',  { rows: timesEntries, slotCount: slotCount, timeSlots: timeEntries });
+      res.render('GuestView',  { rows: timesEntries, slotCount: slotCount, timeSlots: timeEntries });
     
   }).catch((err) => {
     throw err;
@@ -82,12 +82,12 @@ router.get('/guest', (req, res) => {
 });
 
 // for adding guest data to the database
-router.get('/add-guest', (req, res) => {
+router.get('/addName', (req, res) => {
   // get the name value from the form
   let name = req.query.name;
 
   if (!name) {
-    res.redirect('/guest');
+    res.redirect('/enter-guest');
     return;
   }
 
@@ -116,13 +116,13 @@ router.get('/add-guest', (req, res) => {
         throw err;
 
       // redirect back to the page
-      res.redirect('/guest');
+      res.redirect('/enter-guest');
       return;
     })
   conn.end();
 });
 
-router.get('/admin-view', (req, res) => {
+router.get('/AdminView', (req, res) => {
   // if the user is not logged in then redirect them to the home page
   if (currentUser === undefined)
   {
@@ -131,7 +131,7 @@ router.get('/admin-view', (req, res) => {
   }
 
   getPageData().then(({timeEntries, timesEntries}) => {
-      res.render('admin-view', {user: currentUser, timeSlots: timeEntries, rows: timesEntries, slotCount: slotCount})
+      res.render('AdminView', {user: currentUser, timeSlots: timeEntries, rows: timesEntries, slotCount: slotCount})
     
   }).catch((err) => {
     throw err;
@@ -161,9 +161,9 @@ router.get('/update-slots', async (req, res) => {
     "Slot10": req.query.Slot10
   }
 
-  // call the async function to update the values of the timeSlots table
+  //Update the slotValues
   updateTimeSlots(slotValues).then(() => {
-    res.redirect('/admin-view');
+    res.redirect('/AdminView');
     return;
 
   }).catch((err) => {

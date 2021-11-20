@@ -24,7 +24,7 @@
     <thead>
       <tr class="admin-input-row">
         <form action="/update-slots" method="GET" id="admin-slot-form">
-        <th style="border-bottom-left-radius: 5px; border-top-left-radius: 5px;">
+        <th class="display">
           <button form="admin-slot-form" class="btn-save-admin" title="Submit">SUBMIT</button>
         </th>
         <th style="color: black;">Guest Name</th>
@@ -49,7 +49,7 @@
         for (row of rows) {
       %>
       <tr>
-        <td style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+        <td class="display">
         </td>
         <td>
           <input class="name" placeholder="Enter Name" type="text" value="<%= row.Name %>" disabled/>

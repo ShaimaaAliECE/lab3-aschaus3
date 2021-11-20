@@ -30,9 +30,9 @@
 
     <tbody>
       <tr class="form-row-tr">
-        <form id="x" action="/add-guest" method="GET">
-          <div class="doodle-form-row">
-            <td style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+        <form id="x" action="/addName" method="GET">
+          <div>
+            <td class="display">
             </td>
             <td>
               <input class="name" placeholder="Enter Name" type="text" name="name" />
@@ -55,7 +55,7 @@
         for (row of rows) {
       %>
       <tr>
-        <td style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+        <td class="display">
         </td>
         <td>
           <input class="name" placeholder="Enter Name" type="text" value="<%= row.Name %>" disabled/>

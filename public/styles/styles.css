@@ -128,3 +128,7 @@ table tr td:nth-last-child(1) {
   text-transform: uppercase;
   margin: 10px auto;
 }
+.display{
+  border-top-left-radius: 5px; 
+  border-bottom-left-radius: 5px
+}
